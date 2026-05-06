@@ -40,14 +40,14 @@ export default ({
       JSXOpeningElement: (node: JSXOpeningElement) => {
         const checkHtmlHasLang = context.options[0]?.htmlHasLang ?? false;
         const langProp = getProp(node.attributes, 'lang');
-        const langPropVal = getLiteralPropValue(langProp);
+        const value = getLiteralPropValue(langProp);
         const type = elementType(node);
 
         if (type && type !== 'html') {
           return;
         }
 
-        if (checkHtmlHasLang && langProp === undefined) {
+        if (checkHtmlHasLang && (langProp === undefined || value === undefined)) {
           context.report({
             node,
             message: htmlHasLangErrorMessage,
@@ -56,14 +56,14 @@ export default ({
         }
 
         // Don't check identifiers
-        if (langPropVal === null) {
+        if (value === null) {
           return;
         }
-        if (langProp === undefined || langPropVal === undefined) {
+        if (langProp === undefined || value === undefined) {
           return;
         }
 
-        if (tags.check(langPropVal)) {
+        if (tags.check(value)) {
           return;
         }
 

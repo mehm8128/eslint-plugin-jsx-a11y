@@ -16,7 +16,7 @@ This rule takes one optional boolean that determines whether to check for the `l
 ```json
 {
     "rules": {
-        "jsx-a11y/lang": [ 2, {
+        "jsx-a11y/lang": [2, {
             "htmlHasLang": true
         }]
     }

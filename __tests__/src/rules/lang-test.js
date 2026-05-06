@@ -52,6 +52,7 @@ ruleTester.run('lang', rule, {
     { code: '<HTML lang="foo" />' },
     { code: '<Foo lang={undefined} />' },
     { code: '<html lang={undefined} />' },
+    { code: '<html lang={foo} />', options: [{ htmlHasLang: true }] },
     { code: '<Foo lang={undefined} />', settings: componentsSettings },
     { code: '<Foo lang="en" />', settings: componentsSettings },
     { code: '<Box as="html" lang="en"  />', settings: componentsSettings },
@@ -63,6 +64,10 @@ ruleTester.run('lang', rule, {
     { code: '<html lang="zz-LL" />', errors: [expectedError] },
     { code: '<Box as="html" lang="foo" />', settings: componentsSettings, errors: [expectedError] },
     { code: '<html />', options: [{ htmlHasLang: true }], errors: [expectedHtmlHasLangError] },
+    { code: '<html lang={undefined} />', options: [{ htmlHasLang: true }], errors: [expectedHtmlHasLangError] },
+    {
+      code: '<Foo lang={undefined} />', settings: componentsSettings, options: [{ htmlHasLang: true }], errors: [expectedHtmlHasLangError],
+    },
     {
       code: '<Foo />', settings: componentsSettings, options: [{ htmlHasLang: true }], errors: [expectedHtmlHasLangError],
     },
